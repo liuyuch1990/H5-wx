@@ -108,7 +108,7 @@ export default {
           this.finished = true;
         }else{
             res.result.data.filter(e=>{
-                e.active = false   
+                    //e.active = false
             })
             this.list = this.list.concat(res.result.data);
         }
