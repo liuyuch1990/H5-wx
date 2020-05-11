@@ -50,6 +50,11 @@ const routes = [
     component: () => import('../views/activeDev.vue')
   },
   {
+    path: '/userManage',
+    name: 'userManage',
+    component: () => import('../views/userManage.vue')
+  },
+  {
     path: '/addBar',
     name: 'addBar',
     component: () => import('../views/addBar.vue')

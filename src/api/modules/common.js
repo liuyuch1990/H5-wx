@@ -65,6 +65,14 @@ export function queryAllTemplate(params){
   })
 }
 
+// 查询用户
+export function queryAllUser(){
+  return request({
+    url: requestUrl('sys/user/queryAllUsers'),
+    method: 'get',
+  })
+}
+
 // 查询模板
 export function tempaleSave(params){
   return request({
