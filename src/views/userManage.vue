@@ -10,18 +10,25 @@
         <div v-for="item in list" :key="item.id"
               >
             <van-card
-                    num="2"
-                    price="2.00"
                     :desc="item.endTime"
                     :title="item.username"
                     :thumb="item.headimgurl"
             >
                 <template #footer>
-                    <van-button size="mini">按钮</van-button>
+                    <van-button size="mini"  @click="selectStart">按钮</van-button>
                 </template>
             </van-card>
         </div>
     </van-list>
+<!--    <van-popup v-model="show" position="bottom">-->
+<!--        <van-datetime-picker-->
+<!--                type="datetime"-->
+<!--                :formatter="formatter"-->
+<!--                :min-date="new Date()"-->
+<!--                @cancel="cancel"-->
+<!--                @confirm="sconfirm"-->
+<!--        />-->
+<!--    </van-popup>-->
 </template>
 
 <script>
@@ -37,7 +44,6 @@
                 page: 1,
                 size: 5,
                 actives: "",
-                loading: false,
                 finished: false,
                 name: "",
                 remark: ""
@@ -48,8 +54,36 @@
                 // 异步更新数据
                 this.queryAllUser()
             },
+            selectStart(){
+                this.show = true;
+            },
+            cancel(){
+                this.show = false
+            },
+            formatter(type, value){
+                if (type === 'year') {
+                    return `${value}年`;
+                } else if (type === 'month') {
+                    return `${value}月`
+                } else if (type === 'day' ) {
+                    return `${value}日`
+                } else if (type === 'hour' ) {
+                    return `${value}小时`
+                } else {
+                    return `${value}分`
+                }
+                return value;
+            },
+            sconfirm(value){
+                this.Show = false;
+                let startTime = this.dateFtt("yyyy-MM-dd hh:mm:ss", new Date(value));
+                this.$emit("update:startTime", startTime);
+            },
             async queryAllUser() {
-                let {data: res} = await this.$api.common.queryAllUser()
+                let {data: res} = await this.$api.common.queryAllUser({
+                    pageSize: this.size,
+                    pageNum: (this.page - 1) * 5 + 1
+                })
                 this.loading = false;
                 this.page++;
                 if (res.code === '0000') {
@@ -63,6 +97,23 @@
                     this.$notify({type: 'danger', message: res.msg})
                 }
             },
+            dateFtt(fmt,date) { //author: meizz
+                var o = {
+                    "M+" : date.getMonth()+1,                 //月份
+                    "d+" : date.getDate(),                    //日
+                    "h+" : date.getHours(),                   //小时
+                    "m+" : date.getMinutes(),                 //分
+                    "s+" : date.getSeconds(),                 //秒
+                    "q+" : Math.floor((date.getMonth()+3)/3), //季度
+                    "S"  : date.getMilliseconds()             //毫秒
+                };
+                if(/(y+)/.test(fmt))
+                    fmt=fmt.replace(RegExp.$1, (date.getFullYear()+"").substr(4 - RegExp.$1.length));
+                for(var k in o)
+                    if(new RegExp("("+ k +")").test(fmt))
+                        fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));
+                return fmt;
+            }
         }
     }
 </script>

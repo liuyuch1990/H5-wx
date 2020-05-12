@@ -66,10 +66,11 @@ export function queryAllTemplate(params){
 }
 
 // 查询用户
-export function queryAllUser(){
+export function queryAllUser(params){
   return request({
     url: requestUrl('sys/user/queryAllUsers'),
     method: 'get',
+    params: requestParam(params, 'get')
   })
 }
 

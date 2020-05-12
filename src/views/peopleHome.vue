@@ -110,6 +110,10 @@
                     {
                         label: "标签",
                         icon: "bookmark"
+                    },
+                    {
+                        label: "用户",
+                        icon: "friends"
                     }
                 ]
             };
@@ -219,6 +223,13 @@
                 if (item.label === '抢购') {
                     this.$router.push({
                         path: 'qianggouDev', query: {
+                            isAdmin: true
+                        }
+                    })
+                }
+                if (item.label === '用户') {
+                    this.$router.push({
+                        path: 'userManage', query: {
                             isAdmin: true
                         }
                     })
