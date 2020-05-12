@@ -79,10 +79,10 @@ export default {
   methods: {
     onLoad() {
       // 异步更新数据
-      this.queryAllTemplate()
+      this.queryAllTemplateById()
     },
-    async queryAllTemplate(){
-      let {data: res} = await this.$api.common.queryAllTemplate({
+    async queryAllTemplateById(){
+      let {data: res} = await this.$api.common.queryAllTemplateById({
         pageSize: this.size,
         pageNum: (this.page - 1) * 5 + 1,
         activityId: !!this.actives ? this.actives : undefined
@@ -115,7 +115,7 @@ export default {
         this.page = 1;
         this.actives = item.value;
       }
-      this.queryAllTemplate();
+      this.queryAllTemplateById();
     },
     async queryByType(){
       this.$toast.loading({

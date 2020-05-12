@@ -65,6 +65,14 @@ export function queryAllTemplate(params){
   })
 }
 
+export function queryAllTemplateById(params){
+  return request({
+    url: requestUrl('api/activity/queryAllTemplateById'),
+    method: 'get',
+    params: requestParam(params, 'get')
+  })
+}
+
 // 查询用户
 export function queryAllUser(params){
   return request({
