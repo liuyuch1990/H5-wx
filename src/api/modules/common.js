@@ -82,6 +82,15 @@ export function queryAllUser(params){
   })
 }
 
+// 更新用户
+export function updateUser(params){
+  return request({
+    url: requestUrl('sys/user/updateUser'),
+    method: 'post',
+    data: requestParam(params)
+  })
+}
+
 // 查询模板
 export function tempaleSave(params){
   return request({

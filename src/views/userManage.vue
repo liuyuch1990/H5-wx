@@ -1,4 +1,5 @@
 <template>
+    <div>
     <van-list
             v-model="loading"
             :finished="finished"
@@ -7,7 +8,7 @@
             class="activity"
             @load="onLoad"
     >
-        <div v-for="item in list" :key="item.id"
+        <div v-for="(item,index) in list" :key="index"
               >
             <van-card
                     :desc="item.endTime"
@@ -15,20 +16,21 @@
                     :thumb="item.headimgurl"
             >
                 <template #footer>
-                    <van-button size="mini"  @click="selectStart">按钮</van-button>
+                    <van-button size="mini"  @click="selectStart(index)">更新</van-button>
                 </template>
             </van-card>
         </div>
     </van-list>
-<!--    <van-popup v-model="show" position="bottom">-->
-<!--        <van-datetime-picker-->
-<!--                type="datetime"-->
-<!--                :formatter="formatter"-->
-<!--                :min-date="new Date()"-->
-<!--                @cancel="cancel"-->
-<!--                @confirm="sconfirm"-->
-<!--        />-->
-<!--    </van-popup>-->
+    <van-popup v-model="show" position="bottom">
+        <van-datetime-picker
+                type="datetime"
+                :formatter="formatter"
+                :min-date="new Date()"
+                @cancel="cancel"
+                @confirm="sconfirm"
+        />
+    </van-popup>
+    </div>
 </template>
 
 <script>
@@ -36,9 +38,10 @@
         name: "userManage",
         data() {
             return {
-                bar: [],
+                index:'',
                 show: false,
                 loading: false,
+                endTime: "",
                 finished: false,
                 list: [],
                 page: 1,
@@ -54,7 +57,8 @@
                 // 异步更新数据
                 this.queryAllUser()
             },
-            selectStart(){
+            selectStart(e){
+                this.index = e ;
                 this.show = true;
             },
             cancel(){
@@ -75,9 +79,19 @@
                 return value;
             },
             sconfirm(value){
-                this.Show = false;
+                this.show = false;
+                let index = this.index;
                 let startTime = this.dateFtt("yyyy-MM-dd hh:mm:ss", new Date(value));
-                this.$emit("update:startTime", startTime);
+                this.list[index].endTime =  startTime ;
+                let {data: res} = this.$api.common.updateUser({
+                    "userId": this.list[index].userId,
+                    "endTime": startTime
+                })
+                if (res.code === '0000') {
+                    this.$notify({type: 'success', message: "更新成功"})
+                } else {
+                    this.$notify({type: 'danger', message: res.msg})
+                }
             },
             async queryAllUser() {
                 let {data: res} = await this.$api.common.queryAllUser({
