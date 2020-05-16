@@ -116,9 +116,16 @@
                     "value": lst.join(',')
                 })
                 if (res.code === '0000') {
-                    this.queryByType();
-                    this.show = false;
-                    this.$notify({type: 'success', message: "绑定成功"})
+                    this.bar.filter(e => {
+                        if (e.active === true) {
+                            e.value = lst.join(',');
+                        }
+                    })
+                    if(item.active===true) {
+                        this.$notify({type: 'success', message: "绑定成功"})
+                    }else{
+                        this.$notify({type: 'success', message: "解绑成功"})
+                    }
                 } else {
                     this.$notify({type: 'danger', message: res.msg})
                 }

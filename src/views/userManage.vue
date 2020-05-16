@@ -78,12 +78,12 @@
                 }
                 return value;
             },
-            sconfirm(value){
+            async sconfirm(value){
                 this.show = false;
                 let index = this.index;
                 let startTime = this.dateFtt("yyyy-MM-dd hh:mm:ss", new Date(value));
                 this.list[index].endTime =  startTime ;
-                let {data: res} = this.$api.common.updateUser({
+                let {data: res} = await this.$api.common.updateUser({
                     "userId": this.list[index].userId,
                     "endTime": startTime
                 })
