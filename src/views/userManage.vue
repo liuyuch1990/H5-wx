@@ -11,12 +11,14 @@
         <div v-for="(item,index) in list" :key="index"
               >
             <van-card
-                    :desc="item.endTime"
+                    :price="item.endTime"
+                    currency="截至时间"
+                    @desc="onDesc"
                     :title="item.username"
                     :thumb="item.headimgurl"
             >
                 <template #footer>
-                    <van-button size="mini"  @click="selectStart(index)">更新</van-button>
+                    <van-button size="mini" round @click="selectStart(index)">更新</van-button>
                 </template>
             </van-card>
         </div>
@@ -56,6 +58,11 @@
             onLoad() {
                 // 异步更新数据
                 this.queryAllUser()
+            },
+            onDesc(item) {
+                // 异步更新数据
+                let value = "公司：";
+                return value;
             },
             selectStart(e){
                 this.index = e ;

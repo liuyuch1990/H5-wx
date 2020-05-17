@@ -55,6 +55,11 @@ const routes = [
     component: () => import('../views/userManage.vue')
   },
   {
+    path: '/payOut',
+    name: 'payOut',
+    component: () => import('../views/payOut.vue')
+  },
+  {
     path: '/addBar',
     name: 'addBar',
     component: () => import('../views/addBar.vue')
