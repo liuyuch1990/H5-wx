@@ -65,6 +65,11 @@ const routes = [
     component: () => import('../views/addBar.vue')
   },
   {
+    path: '/approval',
+    name: 'approval',
+    component: () => import('../views/approval.vue')
+  },
+  {
     path: '/userMgr',
     name: 'userMgr',
     component: () => import('../views/userMgr.vue')

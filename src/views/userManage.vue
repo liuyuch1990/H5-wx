@@ -12,11 +12,15 @@
               >
             <van-card
                     :price="item.endTime"
-                    currency="截至时间"
-                    @desc="onDesc"
+                    currency="截至时间:"
+                    :desc="item.desc"
                     :title="item.username"
                     :thumb="item.headimgurl"
             >
+                <template #tags>
+                    {{item.company}}
+                    <van-tag>{{item.contact}}</van-tag>
+                </template>
                 <template #footer>
                     <van-button size="mini" round @click="selectStart(index)">更新</van-button>
                 </template>
@@ -58,11 +62,6 @@
             onLoad() {
                 // 异步更新数据
                 this.queryAllUser()
-            },
-            onDesc(item) {
-                // 异步更新数据
-                let value = "公司：";
-                return value;
             },
             selectStart(e){
                 this.index = e ;
@@ -112,6 +111,11 @@
                         this.finished = true;
                     } else {
                         this.list = this.list.concat(res.result.user);
+                        this.list.filter(e => {
+                            e.desc = "公司名:" + e.companyName
+                            e.company = "地址："+e.companyProvince+ e.companyCity;
+                            e.contact = "联系方式：" + e.mobile
+                        })
                     }
                 } else {
                     this.finished = true;

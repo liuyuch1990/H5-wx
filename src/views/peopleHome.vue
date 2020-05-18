@@ -114,6 +114,10 @@
                     {
                         label: "用户",
                         icon: "friends"
+                    },
+                    {
+                        label: "提现",
+                        icon: "cash-back-record"
                     }
                 ]
             };
@@ -230,6 +234,13 @@
                 if (item.label === '用户') {
                     this.$router.push({
                         path: 'userManage', query: {
+                            isAdmin: true
+                        }
+                    })
+                }
+                if (item.label === '提现') {
+                    this.$router.push({
+                        path: 'approval', query: {
                             isAdmin: true
                         }
                     })

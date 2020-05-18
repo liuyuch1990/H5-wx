@@ -91,6 +91,24 @@ export function updateUser(params){
   })
 }
 
+// 查询提现审批记录
+export function queryAllApproval(params){
+  return request({
+    url: requestUrl('sys/user/queryAllApproval'),
+    method: 'get',
+    params: requestParam(params, 'get')
+  })
+}
+
+// 保存/更新提现审批记录
+export function saveApproval(params){
+  return request({
+    url: requestUrl('sys/user/saveApproval'),
+    method: 'post',
+    data: requestParam(params)
+  })
+}
+
 // 查询模板
 export function tempaleSave(params){
   return request({
