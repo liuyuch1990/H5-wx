@@ -8,8 +8,7 @@
                 class="activity"
                 @load="onLoad"
         >
-            <div v-for="(item,index) in list" :key="index"
-            >
+            <div v-for="(item,index) in list" :key="index">
                 <van-card
                         :price="item.money"
                         currency="￥"
@@ -23,7 +22,8 @@
                     </template>
                     <template #footer>
                         申请时间：{{item.createTime}}
-                        <van-button size="mini" round @click="updateStaus(index)" :text="item.button"></van-button>
+                        <van-button size="mini" round @click="updateStaus(index)" :text="item.button" type="danger" v-show="item.show"></van-button>
+                        <van-button size="mini" round @click="updateStaus(index)" :text="item.button" type="info" v-show="!item.show"></van-button>
                     </template>
                 </van-card>
             </div>
@@ -63,7 +63,7 @@
                 })
                 if (res.code === '0000') {
                     this.$notify({type: 'success', message: "审批成功"})
-                    this.queryAllApproval()
+                    window.location.reload()
                 } else {
                     this.$notify({type: 'danger', message: res.msg})
                 }
@@ -86,8 +86,10 @@
                             e.contact = "联系方式：" + e.mobile
                             if(e.status==='1'){
                                 e.button = "待审批";
+                                e.show = true;
                             }else{
                                 e.button = "通过";
+                                e.show = false;
                             }
 
                         })

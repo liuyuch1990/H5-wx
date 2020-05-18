@@ -248,6 +248,9 @@
                 if (item.label === '标签') {
                     this.$router.push({path: 'addbar'})
                 }
+                if (item.label === '我的钱包') {
+                    this.$router.push({path: 'payOut'})
+                }
                 if (item.label === '联系客服') {
                     window.location.href = 'https://mp.weixin.qq.com/s/wYbgjxQt43iAB40J9rgOaA';
                 }
