@@ -50,7 +50,7 @@ img {
 }
 
 .spinner > div {
-  background-color: #fe3c71;
+  background-color:#FFFF00;
   height: 100%;
   width: 6px;
   margin: 0 2px;

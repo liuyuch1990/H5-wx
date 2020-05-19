@@ -52,7 +52,7 @@
         <van-cell-group>
             <van-cell>
                 <template slot="title">
-                    <van-radio v-model="isAggre" name="1">阅读并同意 <span style="color: rgb(31, 106, 198);">《商家恋用户协议》</span></van-radio>
+                    <van-radio v-model="isAggre" name="1">阅读并同意 <span style="color: rgb(31, 106, 198);">《闪电云招用户协议》</span></van-radio>
                 </template>
             </van-cell>
         </van-cell-group>
