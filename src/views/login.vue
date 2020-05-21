@@ -8,7 +8,7 @@
             <van-field v-model="password"  type="password" placeholder="请输入登录密码" />
         </van-cell-group>
         <van-button class="btn" round type="info" :loading="loading" @click="login">登录</van-button>
-        <div class="link-phone">联系客服</div>
+        <div class="link-phone" @click="linkContact">联系客服</div>
         <div class="flex-wrap">
             <div class="link-phone" @click="linkRegister">注册账号</div>
             <div class="line"></div>
@@ -36,6 +36,9 @@ export default {
     ...mapMutations('common', {
       setUser: "setUser"
     }),
+      linkContact(){
+          window.location.href = 'https://mp.weixin.qq.com/s/wYbgjxQt43iAB40J9rgOaA'
+      },
     linkRegister(){
       this.$router.push({path: 'register'})
     },
