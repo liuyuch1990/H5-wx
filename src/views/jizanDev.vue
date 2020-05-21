@@ -300,7 +300,7 @@ export default {
     mapClick(address, lat, log){
       this.metaData.address = address;
       this.metaData.latitude = lat;
-      this.metaData.longitude = lng;
+      this.metaData.longitude = log;
     },
     async getInfo(id){
       this.$toast.loading({

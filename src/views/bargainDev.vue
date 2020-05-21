@@ -374,7 +374,7 @@ export default {
     mapClick(address, lat, log){
       this.metaData.address = address;
       this.metaData.latitude = lat;
-      this.metaData.longitude = lng;
+      this.metaData.longitude = log;
     },
     imgDelete(key){
         this.metaData[key] = [];

@@ -109,15 +109,15 @@
                     },
                     {
                         label: "标签",
-                        icon: "bookmark"
+                        icon: "fire"
                     },
                     {
                         label: "用户",
-                        icon: "friends"
+                        icon: "fire"
                     },
                     {
                         label: "提现",
-                        icon: "cash-back-record"
+                        icon: "fire"
                     }
                 ]
             };
