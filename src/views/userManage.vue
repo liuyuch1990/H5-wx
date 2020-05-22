@@ -102,7 +102,7 @@
             async queryAllUser() {
                 let {data: res} = await this.$api.common.queryAllUser({
                     pageSize: this.size,
-                    pageNum: (this.page - 1) * 5 + 1
+                    pageNum: (this.page - 1) * 5
                 })
                 this.loading = false;
                 this.page++;
