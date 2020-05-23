@@ -568,7 +568,7 @@ export default {
     linkreload() {
       location.href =
         location.origin +
-        "statics/dist/redirect.html" +
+        "/statics/dist/redirect.html" +
         "?id=" +
         this.urlParams.id +
         "&hash=jizanPro&shown=1";
