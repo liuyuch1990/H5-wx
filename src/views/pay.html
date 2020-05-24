@@ -114,7 +114,9 @@
         $('#value').text(search.total_fee);
         $('.btn-pay').click(function () {
             $.ajax({
-                url: "https://wxp.sharkmeida.cn/api/wxpay/prepay" + location.search,
+                type: 'POST',
+                data: search,
+                url: "https://wxp.sharkmeida.cn/api/wxpay/prepay",
                 success: function (res) {
                     WeixinJSBridge.invoke(
                         "getBrandWCPayRequest",

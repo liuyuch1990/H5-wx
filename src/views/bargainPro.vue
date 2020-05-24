@@ -44,7 +44,7 @@
       <div v-if="!!this.shareId" @click="addZan" class="btn animate">帮忙砍价</div>
       <div v-if="!this.shareId" @click="openDialog" class="btn animate">参加活动</div>
       <div v-if="!!shareId && b_userId != user_id" @click="linkreload" class="btn animate">参加活动</div>
-      <div v-if="!!this.shareId && b_userId == user_id && metaData.floorPrice == prize" class="btn animate">支付</div>
+      <div v-if="!!this.shareId && b_userId == user_id && metaData.floorPrice == prize" class="btn animate" @click="linkPay">支付</div>
       <ul class="wrap-wx" v-if="barginLogList.length">
         <li v-for="(item, index) in barginLogList" :key="index">
           <img :src="item.headimgurl" />
@@ -539,8 +539,8 @@ export default {
       if (!!params.shareId) {
         this.shareId = params.shareId;
       }
-      if (!!params.shown) {
-        this.shown = !!params.shown ? true : false;
+      if (!!params.show) {
+        this.show = !!params.show ? true : false;
       }
       if (!!params.code) {
         let { data: res } = await this.$api.common.getUserInfo({
@@ -635,7 +635,7 @@ export default {
         "/statics/dist/redirect.html" +
         "?id=" +
         this.urlParams.id +
-        "&hash=bargainPro&shown=1";
+        "&hash=bargainPro&show=1";
     },
     //地图初始化
     initQQMap() {
