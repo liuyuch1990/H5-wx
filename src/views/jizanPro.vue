@@ -121,7 +121,7 @@
                 </div>
             </div>
         </content-wrap>
-        <order-soft :list="orderList" :floorPrice="metaData.floorPrice"></order-soft>
+        <zan-soft :list="orderList" :targetNum="metaData.targetNum"></zan-soft>
 
         <img v-if="metaData.footImage" :src="metaData.footImage" width="100%"/>
 
@@ -221,7 +221,7 @@
     import VTextarea from "../components/textarea";
     import AddFile from "../components/addFile";
     import AddComponent from "../components/addComponent";
-    import OrderSoft from "../components/orderSoft";
+    import ZanSoft from "../components/zanSoft";
     import TitleActive from "../components/titleActive";
     import ThemeActivity from "../components/theme";
     import Special from "../components/special";
@@ -626,7 +626,7 @@
             VTextarea,
             AddFile,
             AddComponent,
-            OrderSoft,
+            ZanSoft,
             TitleActive,
             ThemeActivity,
             Special,
@@ -860,8 +860,7 @@
         background: #fff;
         flex-wrap: wrap;
     }
-
-    .wrap-3 > div {
+    .wrap-3  div {
         display: flex;
         width: 1rem;
         height: 1.7rem;
@@ -870,11 +869,19 @@
         align-items: center;
         margin: 0.2rem;
     }
-
     .wrap-3 img {
         height: 1rem;
         width: 1rem;
         border-radius: 50%;
+    }
+    .wrap-3 span {
+        font-size: 0.2rem;
+        display: inline-block;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        width: 1rem;
+        text-align: center;
     }
 </style>
 
