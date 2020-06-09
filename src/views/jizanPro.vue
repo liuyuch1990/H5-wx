@@ -860,7 +860,7 @@
         background: #fff;
         flex-wrap: wrap;
     }
-    .wrap-3  div {
+    .wrap-3 > div {
         display: flex;
         width: 1rem;
         height: 1.7rem;
@@ -868,6 +868,7 @@
         justify-content: space-between;
         align-items: center;
         margin: 0.2rem;
+        display: inline-flex;
     }
     .wrap-3 img {
         height: 1rem;
