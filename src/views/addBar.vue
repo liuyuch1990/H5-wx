@@ -171,6 +171,7 @@
                     this.page = 1;
                     this.actives = item.value;
                 }
+                this.finished = false;
                 this.queryAllTemplate();
             },
             async queryByType() {
