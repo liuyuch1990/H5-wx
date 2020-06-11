@@ -351,6 +351,7 @@ export default {
       let {data: res} = await this.$api.common.jizanSave(this.jizanData);
       this.$toast.clear();
       if(res.code === "0000"){
+         this.jizanData.id = res.result.gather.id;
          this.$notify({ type: 'success', message: "保存成功！" });
       }else {
          this.$notify({ type: 'danger', message: res.msg });

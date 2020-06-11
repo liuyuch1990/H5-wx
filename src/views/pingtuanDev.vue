@@ -337,6 +337,7 @@ export default {
       let {data: res} = await this.$api.common.grouponSave(this.pingtuanData);
       this.$toast.clear();
       if(res.code === "0000"){
+         this.pingtuanData.id = res.result.groupon.id;
          this.$notify({ type: 'success', message: "保存成功！" });
       }else {
          this.$notify({ type: 'danger', message: res.msg });

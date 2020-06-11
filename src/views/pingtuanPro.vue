@@ -535,9 +535,9 @@ export default {
         params.companyInfo = JSON.parse(params.companyInfo);
         params.prizeInfo = JSON.parse(params.prizeInfo);
         this.metaData = params;
-        this.$refs["bgimage"].style.background = !this.metaData.bgImage.length
+        this.$refs["bgimage"].style.background = !this.metaData.bgImage
         ? "#0b084a"
-        : `url(${this.metaData.bgImage[0].url})`;
+        : `url(${this.metaData.bgImage})`;
         return;
       }
       

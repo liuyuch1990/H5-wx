@@ -442,6 +442,7 @@ export default {
       let {data: res} = await this.$api.common.barginSave(this.bargainData);
       this.$toast.clear();
       if(res.code === "0000"){
+         this.bargainData.id = res.result.bargin.id;
          this.$notify({ type: 'success', message: "保存成功！" });
       }else {
          this.$notify({ type: 'danger', message: res.msg });

@@ -552,9 +552,9 @@ line-height: 0.4rem;">联系商家</a>
                     params.redRules = JSON.parse(params.redRules);
                     params.activityDestription = JSON.parse(params.activityDestription);
                     this.metaData = params;
-                    this.$refs["bgimage"].style.background = !this.metaData.bgImage.length
+                    this.$refs["bgimage"].style.background = !this.metaData.bgImage
                         ? "#a6141d"
-                        : `url(${this.metaData.bgImage[0].url})`;
+                        : `url(${this.metaData.bgImage})`;
                     return;
                 }
                 if (!!params.shareId) {

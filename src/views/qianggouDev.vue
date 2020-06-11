@@ -286,6 +286,7 @@ export default {
       let {data: res} = await this.$api.common.distributionSave(this.qianggouData);
       this.$toast.clear();
       if(res.code === 0){
+         this.qianggouData.id = res.distribution.id;
          this.$notify({ type: 'success', message: "保存成功！" });
       }else {
          this.$notify({ type: 'danger', message: res.msg });
