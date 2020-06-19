@@ -65,7 +65,13 @@ export default {
             self.imgUrl = result;
             let blob = self.dataURItoBlob(data);
             //console.log(blob);
-            self.upload(file);
+            if (result.length / 1024 / 1024 > 1){
+              var file1 = new File([blob], file.name, {type: file.type, lastModified: Date.now()});
+              self.upload(file1);
+            }else{
+              self.upload(file);
+            }
+
           };
           img.src = result;
         };
