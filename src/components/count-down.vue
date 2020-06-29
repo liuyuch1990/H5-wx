@@ -34,7 +34,7 @@ export default {
     // }
   },
   mounted() {
-    this.countdowm(this.endTime, this.startTime);
+    this.countdowm(this.endTime.replace(/-/g,'/'), this.startTime.replace(/-/g,'/'));
   },
   methods: {
     countdowm(timestamp, startime) {

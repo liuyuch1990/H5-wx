@@ -159,6 +159,7 @@
                 this.$router.push({path: 'templateList'})
             },
             timeElapse(date) {
+                date = date.replace(/-/g,'/');
                 var current = new Date();
                 var seconds = (Date.parse(date) - Date.parse(current)) / 1000;
                 var days = Math.floor(seconds / (3600 * 24));
