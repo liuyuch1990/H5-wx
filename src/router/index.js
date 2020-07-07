@@ -1,12 +1,16 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-
+import store from '../store'
+import { mapGetters, mapMutations } from "vuex";
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/login',
     name: 'login',
+    meta: {
+      requireAuth: true // 添加该字段，表示进入这个路由是需要登录的
+    },
     component: () => import('../views/login.vue')
   },
   {
@@ -17,11 +21,17 @@ const routes = [
   {
     path: '/peopleHome',
     name: 'peopleHome',
+    meta: {
+      requireAuth: true // 添加该字段，表示进入这个路由是需要登录的
+    },
     component: () => import('../views/peopleHome.vue')
   },
   {
     path: '/activityList',
     name: 'activityList',
+    meta: {
+      requireAuth: true // 添加该字段，表示进入这个路由是需要登录的
+    },
     component: () => import('../views/activityList.vue')
   },
   {
@@ -42,31 +52,49 @@ const routes = [
   {
     path: '/activePro',
     name: 'activePro',
+    meta: {
+      requireAuth: true // 添加该字段，表示进入这个路由是需要登录的
+    },
     component: () => import('../views/activePro.vue')
   },
   {
     path: '/activeDev',
     name: 'activeDev',
+    meta: {
+      requireAuth: true // 添加该字段，表示进入这个路由是需要登录的
+    },
     component: () => import('../views/activeDev.vue')
   },
   {
     path: '/userManage',
     name: 'userManage',
+    meta: {
+      requireAuth: true // 添加该字段，表示进入这个路由是需要登录的
+    },
     component: () => import('../views/userManage.vue')
   },
   {
     path: '/payOut',
     name: 'payOut',
+    meta: {
+      requireAuth: true // 添加该字段，表示进入这个路由是需要登录的
+    },
     component: () => import('../views/payOut.vue')
   },
   {
     path: '/addBar',
     name: 'addBar',
+    meta: {
+      requireAuth: true // 添加该字段，表示进入这个路由是需要登录的
+    },
     component: () => import('../views/addBar.vue')
   },
   {
     path: '/approval',
     name: 'approval',
+    meta: {
+      requireAuth: true // 添加该字段，表示进入这个路由是需要登录的
+    },
     component: () => import('../views/approval.vue')
   },
   {
@@ -139,4 +167,26 @@ const router = new VueRouter({
   routes
 })
 
+router.beforeEach((to, from, next) => {
+  if (to.meta.requireAuth) {  // 判断该路由是否需要登录权限
+    console.log(router.app.$store.state.common.user)
+    console.log('beforeEach获取当前的token是否存在  '+ store.state.userInfo)
+    if (router.app.$store.state.common.user) {  // 通过vuex state获取当前的token是否存在
+      if(to.path=='/login'){
+        next('/peopleHome')
+      }else{
+        next();
+      }
+    }
+    else {
+      next({
+        path: '/login',
+        query: {redirect: to.fullPath}  // 将跳转的路由path作为参数，登录成功后跳转到该路由
+      })
+    }
+  }
+  else {
+    next();
+  }
+});
 export default router
