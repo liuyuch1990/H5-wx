@@ -19,17 +19,16 @@ service.interceptors.request.use(config => {
 });
 // response拦截器
 service.interceptors.response.use(response => {
-  // 拦截session超时
-  // let isTimeout = (response && response.data && (response.data.code === 1005 || response.data.code === 1006 || response.data.code === 1007 || response.data.code === 1008 || response.data.code === 1013));
-  // if (isTimeout) {
-  //   store.commit('common/setLogin', false);
-  //   store.commit('common/setToken', '');
-  //   store.commit('common/setMenuList', ['projectList']);
-  //   store.commit('common/setBtnPermissionsArr', []);
-  //   store.commit('common/setUserName', '');
-  //   router.replace({path: '/'});
-  // }
-
+  //拦截session超时
+  let isTimeout = (response && response.data && (response.data.code === 201 || response.data.code === 1006 || response.data.code === 1007 || response.data.code === 1008 || response.data.code === 1013));
+  if (isTimeout) {
+    store.commit('common/setLogin', false);
+    store.commit('common/setToken', '');
+    store.commit('common/setMenuList', ['projectList']);
+    store.commit('common/setBtnPermissionsArr', []);
+    store.commit('common/setUserName', '');
+    router.replace({path: '/'});
+  }
   return response;
 }, error => {
   return Promise.reject(error);

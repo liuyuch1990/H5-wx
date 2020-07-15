@@ -169,9 +169,23 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   if (to.meta.requireAuth) {  // 判断该路由是否需要登录权限
-    console.log(router.app.$store.state.common.user)
-    console.log('beforeEach获取当前的token是否存在  '+ store.state.userInfo)
+    console.log('beforeEach获取当前的token是否存在  '+router.app.$store.state.common.user)
     if (router.app.$store.state.common.user) {  // 通过vuex state获取当前的token是否存在
+      if(new Date()>new Date(router.app.$store.state.common.user.expireTime)){
+        var user = router.app.$store.state.common.user;
+        console.log('session expire------login again')
+        router.app.$api.common.login({
+          password: user.password,
+          username: user.mobile
+        }).then(({data: res}) => {
+          if(res.code === '0000'){
+            console.log(res.msg)
+            router.app.$store.commit('common/setUser', res.result.user);
+          } else {
+            console.log(res.msg)
+          };
+        })
+      }
       if(to.path=='/login'){
         next('/peopleHome')
       }else{
@@ -179,10 +193,11 @@ router.beforeEach((to, from, next) => {
       }
     }
     else {
-      next({
-        path: '/login',
-        query: {redirect: to.fullPath}  // 将跳转的路由path作为参数，登录成功后跳转到该路由
-      })
+        if(to.path=='/login'){
+            next();
+        }else{
+            next('/login')
+        }
     }
   }
   else {
