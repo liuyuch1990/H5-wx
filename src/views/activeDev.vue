@@ -2,7 +2,7 @@
     <div class="wrap">
       <music></music>
       <theme-activity></theme-activity>
-      <special></special>
+<!--      <special></special>-->
       <title-active></title-active>
       <van-uploader>
         <div class="upload-div"></div>

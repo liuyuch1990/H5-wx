@@ -4,7 +4,7 @@
       <!-- <music></music> -->
       <user-center></user-center>
       <!-- <theme-activity v-if="!isAdmin"></theme-activity> -->
-      <special></special>
+<!--      <special></special>-->
       <img src="@/assets/img/jizan.jpg" width="100%" />
       <title-active v-model="metaData.activityName" placeholder="快来集爱心，免费赢取**培训一个月的舞蹈课程"></title-active>
       <content-wrap>

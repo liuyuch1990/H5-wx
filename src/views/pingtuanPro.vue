@@ -2,7 +2,7 @@
   <div class="wrap" ref="bgimage">
     <!-- <music></music> -->
     <user-center></user-center>
-    <special></special>
+<!--    <special></special>-->
         <div class="user-info">
           <span @click="likeClick"> <van-icon name="like" :class="{'like': !!metaData.likeflag }" />{{metaData.likeNum}}</span>
           <span> <van-icon name="eye" />{{metaData.viewNum}}</span>

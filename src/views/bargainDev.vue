@@ -4,7 +4,7 @@
       <!-- <music></music> -->
       <user-center></user-center>
       <!-- <theme-activity v-if="!isAdmin"></theme-activity> -->
-      <special></special>
+<!--      <special></special>-->
       <img src="@/assets/img/bargain-head.jpeg" width="100%" />
       <title-active v-model="metaData.activityName"></title-active>
       <content-wrap>

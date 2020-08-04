@@ -4,7 +4,7 @@
       <!-- <music></music> -->
       <user-center></user-center>
       <!-- <theme-activity v-if="!isAdmin"></theme-activity> -->
-      <special></special>
+<!--      <special></special>-->
       <img src="@/assets/img/qianggou.jpeg" width="100%" />
       <title-active v-model="metaData.page1Title"></title-active>
       <content-wrap>

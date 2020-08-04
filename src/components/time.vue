@@ -18,7 +18,7 @@
                     <van-datetime-picker
                         type="datetime"
                         :formatter="formatter"
-                        :min-date="startTime != '' ? new Date(startTime) : new Date()"
+                        :min-date="startTime != '' ? new Date(startTime.replace(/-/g,'/')) : new Date()"
                         @cancel="cancel"
                         @confirm="econfirm"
                     />

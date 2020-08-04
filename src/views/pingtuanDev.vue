@@ -4,7 +4,7 @@
       <!-- <music></music> -->
       <user-center></user-center>
       <!-- <theme-activity v-if="!isAdmin"></theme-activity> -->
-      <special></special>
+<!--      <special></special>-->
       <img src="@/assets/img/pingtuan-head.jpg" width="100%" />
       <title-active v-model="metaData.activityName" placeholder="‘快乐暑假’暑期写作一起拼，成绩一‘夏’提高作文，让成长更精彩"></title-active>
       <content-wrap>
