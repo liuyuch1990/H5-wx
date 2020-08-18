@@ -21,6 +21,14 @@ export function signIn(params){
 }
 
 // 登录
+export function isAuthenticated(){
+  return request({
+    url: requestUrl('sys/isAuthenticated'),
+    method: 'get'
+  })
+}
+
+// 登录
 export function login(params){
   return request({
     url: requestUrl('sys/login'),

@@ -168,7 +168,7 @@ const router = new VueRouter({
     routes
 })
 
-async function login (password,mobile){
+async function login(password, mobile) {
     let {data: res} = await router.app.$api.common.login({
         password: password,
         username: mobile
@@ -185,15 +185,23 @@ async function login (password,mobile){
 router.beforeEach((to, from, next) => {
     if (to.meta.requireAuth) {  // 判断该路由是否需要登录权限
         let path = to.path;
+        let isAuth = null;
         console.log('beforeEach获取当前的token是否存在  ' + router.app.$store.state.common.user)
         if (router.app.$store.state.common.user) {  // 通过vuex state获取当前的token是否存在
-            if (new Date() > new Date(router.app.$store.state.common.user.expireTime)) {
-                var user = router.app.$store.state.common.user;
-                console.log('session expire------login again')
-                login(user.password, user.mobile).then((res) => {
+            router.app.$api.common.isAuthenticated()
+                .then(({data: res}) => {
+                    isAuth = res.result.isAuthenticated;
+                    if (!isAuth) {
+                        var user = router.app.$store.state.common.user;
+                        console.log('session expire------login again')
+                        login(user.password, user.mobile).then((res) => {
+                            console.log(res);
+                        });
+                    }
                     console.log(res);
-                });
-            }
+                }
+            );
+
             if (path === '/login') {
                 next('/peopleHome')
             } else {

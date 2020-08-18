@@ -142,8 +142,8 @@
                 let {data: res} = await this.$api.common.logout();
                 this.$toast.clear();
                 if (res.code === "0000") {
-                    this.$router.push({path: "login"})
                     this.setUser(null)
+                    this.$router.push({path: "login"})
                     this.$notify({type: "success", message: "退出成功"})
                 } else {
                     this.$notify({type: "danger", message: res.msg})
