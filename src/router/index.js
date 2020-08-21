@@ -182,29 +182,36 @@ async function login(password, mobile) {
     return res;
 }
 
+async function isAuthenticated(isAuth) {
+    let {data: res} = await router.app.$api.common.isAuthenticated()
+    if (res.code === '0000') {
+        isAuth = res.result.isAuthenticated;
+        if (!isAuth) {
+            var user = router.app.$store.state.common.user;
+            console.log('session expire------login again')
+            login(user.password, user.mobile).then((res) => {
+                console.log(res);
+            });
+        }
+        //console.log(res);
+    } else {
+        //console.log(res.msg)
+    }
+    return res;
+}
+
 router.beforeEach((to, from, next) => {
     if (to.meta.requireAuth) {  // 判断该路由是否需要登录权限
         let path = to.path;
         let isAuth = null;
         console.log('beforeEach获取当前的token是否存在  ' + router.app.$store.state.common.user)
         if (router.app.$store.state.common.user) {  // 通过vuex state获取当前的token是否存在
-            router.app.$api.common.isAuthenticated()
-                .then(({data: res}) => {
-                    isAuth = res.result.isAuthenticated;
-                    if (!isAuth) {
-                        var user = router.app.$store.state.common.user;
-                        console.log('session expire------login again')
-                        login(user.password, user.mobile).then((res) => {
-                            console.log(res);
-                        });
-                    }
-                    console.log(res);
-                }
-            );
-
             if (path === '/login') {
                 next('/peopleHome')
             } else {
+                isAuthenticated(isAuth).then((res) => {
+                    console.log(res);
+                });
                 next();
             }
         } else {
