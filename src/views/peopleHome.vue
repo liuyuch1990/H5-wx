@@ -18,7 +18,7 @@
         <div class="center">
             <span class="t1">还有<span v-html="timeElapse(userInfo.endTime)"></span>小时到期 <van-button type="info"
                                                                                                    size="small">充值</van-button></span>
-            <span class="t2">{{dateFtt('yyyy年MM月dd日hh:mm到期', new Date(userInfo.endTime))}}</span>
+            <span class="t2">{{dateFtt('yyyy年MM月dd日hh:mm到期', new Date(userInfo.endTime.replace(/-/g,'/')))}}</span>
         </div>
         <van-grid :column-num="3" style="margin-top: 20px;">
             <van-grid-item
