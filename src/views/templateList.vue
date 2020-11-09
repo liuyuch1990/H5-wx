@@ -137,7 +137,7 @@
                     }).then(({data: res}) => {
                         if (res.code === '0000') {
                             this.show = false;
-                            window.top.location.href = "https://wxp.sharkmeida.cn/excel/" + decodeURI(res.result.fileName);
+                            window.top.location.href = "https://wp.sharkmeida.cn/excel/" + decodeURI(res.result.fileName);
                         } else {
                             this.$notify({type: "danger", message: res.msg})
                         }
