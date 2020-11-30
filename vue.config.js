@@ -7,7 +7,7 @@ module.exports = {
 
       '/api': {
 
-        target: 'https://wxp.sharkmeida.cn', //对应服务器地址
+        target: 'https://wp.sharkmeida.cn', //对应服务器地址
 
         changeOrigin: true, //允许跨域
 
