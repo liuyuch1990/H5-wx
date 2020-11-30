@@ -6,7 +6,7 @@
         <van-field
                 readonly
                 clickable
-                :value="userInfo.account"
+                :value="account"
                 label="您的余额￥"
                 @touchstart.native.stop="show = true"
         />
@@ -63,6 +63,7 @@
             return {
                 value: "",
                 value2: "",
+                account:"",
                 show: false,
                 keyboard: 'default',
             };
@@ -73,9 +74,25 @@
                 code: 'code'
             })
         },
+        mounted() {
+            if (this.userInfo.userId) {
+                this.syncUserInfo(this.userInfo.userId)
+            }
+        },
         methods: {
             onInput(value) {
                 this.value2 = ((this.value * 10 + value) * (0.99)).toFixed(2)
+            },
+            syncUserInfo(value) {
+                this.$api.common.syncUserInfo(
+                    value
+                ).then(({data:res})=>{
+                    if (res.code === '0000') {
+                        this.account = res.result.user.account
+                    } else {
+                        this.account = this.userInfo.account
+                    }
+                })
             },
             submitApproval() {
                 if (parseFloat(this.userInfo.account) > parseFloat(this.value2)) {

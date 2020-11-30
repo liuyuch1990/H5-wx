@@ -239,6 +239,15 @@ export function pingtuanInfo(params){
 }
 
 //获取用户详情
+export function syncUserInfo(userId){
+  return request({
+    url: requestUrl('sys/user/info/'+ userId),
+    method: 'post',
+    params: requestParam('post')
+  })
+}
+
+//获取用户详情
 export function getUserInfo(params){
   return request({
     url: requestUrl('api/wxpay/getUserInfo'),
