@@ -95,7 +95,7 @@
                 })
             },
             submitApproval() {
-                if (parseFloat(this.userInfo.account) > parseFloat(this.value2)) {
+                if (parseFloat(this.account) > parseFloat(this.value2)) {
                     this.$api.common.saveApproval({
                         "userId": this.userInfo.userId,
                         "money": this.value2,
