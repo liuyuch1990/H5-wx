@@ -95,14 +95,16 @@
                 })
             },
             submitApproval() {
-                if (parseFloat(this.account) > parseFloat(this.value2)) {
+                if (parseFloat(this.account) > parseFloat(this.value)) {
                     this.$api.common.saveApproval({
                         "userId": this.userInfo.userId,
+                        "originalMoney": this.value,
                         "money": this.value2,
                         "status": "1"
                     }).then(({data: res}) => {
                         if (res.code === '0000') {
                             this.$notify({type: 'success', message: "提现成功"})
+                            this.account = this.account - this.value;
                         } else {
                             this.$notify({type: 'danger', message: res.msg})
                         }
@@ -112,7 +114,7 @@
                 }
             },
             onDelete(value) {
-                this.value2 = ((this.value / 10) * (0.99)).toFixed(2)
+                this.value2 =parseInt(this.value/10) ==0?0.00: ((this.value / 10) * (0.99)).toFixed(2)
             },
         },
     }
