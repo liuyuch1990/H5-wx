@@ -1,7 +1,7 @@
 <template>
     <div>
-        <van-cell is-link @touchstart.native.stop="keyboard = 'multiExtraKey'">
-            提现页
+        <van-cell is-link @touchstart.native.stop="keyboard = 'multiExtraKey'" title="提现页" value="提现记录" @click="toPayList">
+
         </van-cell>
         <van-field
                 readonly
@@ -63,7 +63,7 @@
             return {
                 value: "",
                 value2: "",
-                account:"",
+                account: "",
                 show: false,
                 keyboard: 'default',
             };
@@ -81,12 +81,13 @@
         },
         methods: {
             onInput(value) {
-                this.value2 = ((this.value * 10 + value) * (0.99)).toFixed(2)
+                value = value + "";
+                this.value2 = (parseFloat(this.value + value) * (0.99)).toFixed(2)
             },
             syncUserInfo(value) {
                 this.$api.common.syncUserInfo(
                     value
-                ).then(({data:res})=>{
+                ).then(({data: res}) => {
                     if (res.code === '0000') {
                         this.account = res.result.user.account
                     } else {
@@ -113,8 +114,14 @@
                     this.$notify({type: 'danger', message: "余额不足"})
                 }
             },
+            toPayList(){
+                this.$router.push({path: 'payList'})
+            },
             onDelete(value) {
-                this.value2 =parseInt(this.value/10) ==0?0.00: ((this.value / 10) * (0.99)).toFixed(2)
+                // this.value2 =parseInt(this.value/10) ==0?0.00: ((this.value*100/10) * (0.99)).toFixed(2)
+                console.log(this.value + value);
+                value = this.value.substring(0, this.value.length - 1)
+                this.value2 =  ((value) * (0.99)).toFixed(2)
             },
         },
     }
