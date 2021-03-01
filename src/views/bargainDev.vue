@@ -5,7 +5,8 @@
       <user-center></user-center>
       <!-- <theme-activity v-if="!isAdmin"></theme-activity> -->
 <!--      <special></special>-->
-      <img src="@/assets/img/bargain-head.jpeg" width="100%" />
+      <img v-if="metaData.headImage" :src="metaData.headImage" width="100%" />
+      <img v-else src="@/assets/img/pingtuan-head.jpg" width="100%" />
       <title-active v-model="metaData.activityName"></title-active>
       <content-wrap>
         <create-time :startTime.sync="metaData.startTime" :endTime.sync="metaData.endTime"></create-time>
@@ -247,6 +248,7 @@
           <img-upload :image.sync="metaData.footImage" placeholder="上传底部图片"></img-upload>
       </content-wrap>
       <order-soft></order-soft>
+      <img v-if="metaData.footImage" :src="metaData.footImage" width="100%" />
       <div class="footer" v-if="!show">
         <van-button
           round

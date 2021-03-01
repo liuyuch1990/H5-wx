@@ -5,8 +5,9 @@
       <user-center></user-center>
       <!-- <theme-activity v-if="!isAdmin"></theme-activity> -->
 <!--      <special></special>-->
-      <img src="@/assets/img/jizan.jpg" width="100%" />
-      <title-active v-model="metaData.activityName" placeholder="快来集爱心，免费赢取**培训一个月的舞蹈课程"></title-active>
+      <img v-if="metaData.headImage" :src="metaData.headImage" width="100%" />
+      <img v-else src="@/assets/img/pingtuan-head.jpg" width="100%" />
+      <title-active v-model="metaData.activityName" placeholder=""></title-active>
       <content-wrap>
         <create-time :startTime.sync="metaData.startTime" :endTime.sync="metaData.endTime"></create-time>
       </content-wrap>
@@ -176,6 +177,7 @@
           <img-upload :image.sync="metaData.footImage" placeholder="上传底部图片"></img-upload>
       </content-wrap>
       <order-soft></order-soft>
+      <img v-if="metaData.footImage" :src="metaData.footImage" width="100%" />
       <div class="footer" v-if="!show">
         <van-button
           round

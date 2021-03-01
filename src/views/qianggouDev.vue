@@ -5,7 +5,8 @@
       <user-center></user-center>
       <!-- <theme-activity v-if="!isAdmin"></theme-activity> -->
 <!--      <special></special>-->
-      <img src="@/assets/img/qianggou.jpeg" width="100%" />
+      <img v-if="metaData.headImage" :src="metaData.headImage" width="100%" />
+      <img v-else src="@/assets/img/qianggou.jpeg" width="100%" />
       <title-active v-model="metaData.page1Title"></title-active>
       <content-wrap>
         <create-time :startTime.sync="metaData.startTime" :endTime.sync="metaData.endTime"></create-time>
@@ -19,19 +20,17 @@
         <van-field v-model="metaData.virtualPopularity" type="number" label="虚拟人气值" />
         <van-field v-model="metaData.phone" label="电话" />
         <van-field v-model="metaData.productPrice" label="产品价格" />
-        <van-field v-model="metaData.redEnvelopesName" label="红包名称" />
-        <van-field v-model="metaData.maxValue" type="number" label="红包最大值" />
-        <van-field v-model="metaData.minValue" type="number" label="红包最小值" />
-        <van-field
-              class="c-textarea"
-              v-model="metaData.redEnvelopesBlessings"
-              rows="1"
-              autosize
-              type="textarea"
-              maxlength="15"
-              placeholder="红包祝福语"
-              show-word-limit
-            />
+<!--红包名称-->
+<!--        <van-field-->
+<!--              class="c-textarea"-->
+<!--              v-model="metaData.redEnvelopesBlessings"-->
+<!--              rows="1"-->
+<!--              autosize-->
+<!--              type="textarea"-->
+<!--              maxlength="15"-->
+<!--              placeholder="红包祝福语"-->
+<!--              show-word-limit-->
+<!--            />-->
       </content-wrap>
        <content-wrap title="活动规则">
         <add-component :activeList.sync="metaData.activityRules"></add-component>
@@ -39,9 +38,9 @@
       <content-wrap title="活动说明">
         <add-component :activeList.sync="metaData.activityDestription"></add-component>
       </content-wrap>
-      <content-wrap title="红包规则">
-        <add-component :activeList.sync="metaData.redRules"></add-component>
-      </content-wrap>
+<!--      <content-wrap title="红包规则">-->
+<!--        <add-component :activeList.sync="metaData.redRules"></add-component>-->
+<!--      </content-wrap>-->
       <content-wrap title="信息收集设置">
         <div class="x-title">
           <van-icon name="info" />可以根据活动具体需求来设定需要收集客户的信息字段
@@ -107,6 +106,7 @@
           <img-upload :image.sync="metaData.bgImage" placeholder="上传背景图片"></img-upload>
           <img-upload :image.sync="metaData.footImage" placeholder="上传底部图片"></img-upload>
       </content-wrap>
+      <img v-if="metaData.footImage" :src="metaData.footImage" width="100%" />
       <div class="footer" v-if="!show">
         <van-button
           round
@@ -266,7 +266,7 @@ export default {
       params.activityRules = JSON.stringify(params.activityRules);
       params.redRules = JSON.stringify(params.redRules);
       params.activityDestription = JSON.stringify(params.activityDestription);
-      //params.createUser = this.userInfo.userId;
+      params.createUser = this.userInfo.userId;
       this.setQianggouData(params);
     },
     proview(){

@@ -70,6 +70,7 @@
             },
             async queryAllApproval() {
                 let {data: res} = await this.$api.common.queryAllApproval({
+                    userId:"",
                     pageSize: this.size,
                     pageNum: (this.page - 1) * 5
                 })
